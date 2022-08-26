@@ -19,14 +19,20 @@ const VideoCard: NextPage<Props> = ({ post }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const onVideoPres = () => {
-        if(playing){
+        if (playing) {
             videoRef?.current?.pause();
             setPlaying(false);
-        }else{
+        } else {
             videoRef?.current?.play();
             setPlaying(true);
         }
     }
+
+    useEffect(() => {
+        if(videoRef?.current) {
+            videoRef.current.muted = isVideoMuted;
+        }
+    }, [isVideoMuted])
 
     return (
         <div className='flex flex-col border-b-2 border-gray-200 pb-6'>
@@ -63,40 +69,40 @@ const VideoCard: NextPage<Props> = ({ post }) => {
             </div>
             <div className='lg-ml-20 flex gap-4 relative'>
                 <div
-                    onMouseEnter={() => {setIsHover(true)}} 
-                    onMouseLeave={() => {setIsHover(false)}}
+                    onMouseEnter={() => { setIsHover(true) }}
+                    onMouseLeave={() => { setIsHover(false) }}
                     className='rounded-3xl'>
-                    <Link href="/">
-                        <video 
+                    <Link href={`/detail/${post._id}`}>
+                        <video
                             loop
                             ref={videoRef}
-                            className='lg:w[600px] h-[300px] md:h-[400px] 
-                            g:h-[530px] w-[600px] rounded-2xl cursor-pointer bg-gray-100'
+                            className='lg:w-[600px] h-[300px] md:h-[400px] 
+                            lg:h-[528px] w-[200px] rounded-2xl cursor-pointer bg-gray-100'
                             src={post.video.asset.url}
                         >
                         </video>
                     </Link>
                     {isHover && (
-                        <div className='absolute bottom-6 cursor-pointer left-8 md:left-14 lg-left-0 flex gap-10 lg:justify-between w-[100px] md:w=[50px] p-3'>   
+                        <div className='absolute bottom-6 cursor-pointer left-8 md:left-14 lg-left-0 flex gap-10 lg:justify-between w-[100px] md:w=[50px] p-3'>
                             {
                                 playing ? (
                                     <button onClick={onVideoPres}>
-                                        <BsFillPauseFill className='text-black text-2xl lg:text-4xl'/>
+                                        <BsFillPauseFill className='text-black text-2xl lg:text-4xl' />
                                     </button>
-                                ): (
+                                ) : (
                                     <button onClick={onVideoPres}>
-                                        <BsFillPlayFill  className='text-black text-2xl lg:text-4xl'/>
+                                        <BsFillPlayFill className='text-black text-2xl lg:text-4xl' />
                                     </button>
                                 )
-                            }   
+                            }
                             {
                                 isVideoMuted ? (
                                     <button onClick={() => setIsVideoMuted(false)}>
-                                        <HiVolumeOff className='text-black text-2xl lg:text-4xl'/>
+                                        <HiVolumeOff className='text-black text-2xl lg:text-4xl' />
                                     </button>
-                                ): (
+                                ) : (
                                     <button onClick={() => setIsVideoMuted(true)}>
-                                        <HiVolumeUp  className='text-black text-2xl lg:text-4xl'/>
+                                        <HiVolumeUp className='text-black text-2xl lg:text-4xl' />
                                     </button>
                                 )
                             }

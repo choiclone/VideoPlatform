@@ -56,6 +56,7 @@ const upload = () => {
         userId: userProfile?._id,
         postedBy: {
           _type: 'postedBy',
+          _ref: 'drafts.930416d5-ea2a-4ea3-8ec0-f0afe85a4a4c'
           // _ref: userProfile?._id
         },
         topic: category

@@ -28,7 +28,7 @@ const Detail = ({ postDetails }: Props) => {
     const [playing, setPlaying] = useState(false);
     const [isVideoMuted, setIsVideoMuted] = useState(false);
     const router = useRouter();
-    const { userProfile } : any = useAuthStore();
+    const { userProfile }: any = useAuthStore();
     const [comment, setComment] = useState('');
     const [isPostingComment, setIsPostingComment] = useState(false);
 
@@ -51,27 +51,31 @@ const Detail = ({ postDetails }: Props) => {
     }, [post, isVideoMuted]);
 
     const handleLike = async (like: boolean) => {
-        if(userProfile) {
+        if (userProfile) {
             const { data } = await axios.put(`http://localhost:3000/api/like`, {
                 userId: userProfile._id,
                 postId: post._id,
                 like
             })
 
-            setPost({...post, likes: data.likes})
+            setPost({ ...post, likes: data.likes })
         }
     }
 
-    const addComment = async (e) => {
+    const addComment = async (e:any) => {
         e.preventDefault();
 
-        if(userProfile && comment) {
+        if (userProfile && comment) {
             setIsPostingComment(true);
 
-            const res = await axios.put(`http://localhost:3000/api/post/${post._id}`, {
+            const { data } = await axios.put(`http://localhost:3000/api/post/${post._id}`, {
                 userId: userProfile._id,
                 comment
             });
+
+            setPost({...post, comments: data.comments});
+            setComment('');
+            setIsPostingComment(false);
         }
     }
 
@@ -156,7 +160,7 @@ const Detail = ({ postDetails }: Props) => {
                     <p className='px-10 text-lg text-gray-600'>{post.caption}</p>
                     <div className='mt-10 px-10'>
                         {userProfile && (
-                            <LikeButton 
+                            <LikeButton
                                 likes={post.likes}
                                 handleLike={() => handleLike(true)}
                                 handleDisLike={() => handleLike(false)}
@@ -177,7 +181,7 @@ const Detail = ({ postDetails }: Props) => {
 }
 
 export const getServerSideProps = async ({ params: { id } }: Params) => {
-    const { data } = await axios.get(`${process.env.API_BASE_URL}/post/${id}`)
+    const { data } = await axios.get(`http://localhost:3000/api/post/${id}`)
 
     return {
         props: { postDetails: data }

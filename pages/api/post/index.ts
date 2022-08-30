@@ -19,7 +19,6 @@ export default async function handler(
     }
     else if(req.method === "POST"){
       const document = req.body;
-      console.log(document)
       client.create(document).then(() => {
         res.status(201).json('Vdieo Created')
       });

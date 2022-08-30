@@ -14,15 +14,13 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
       .insert('after', 'likes[-1]', [
         {
           _key: uuid(),
-          _ref: "e673aed1-404b-452c-b9f0-f3ddde32de6b",
-        //   _ref: userId,
+          _ref: userId,
         },
       ])
       .commit()
     : await client
       .patch(postId)
-      .unset([`likes[_ref=="e673aed1-404b-452c-b9f0-f3ddde32de6b"]`])
-    //   .unset([`likes[_ref=="${userId}"]`])
+      .unset([`likes[_ref=="${userId}"]`])
       .commit();
 
     res.status(200).json(data);

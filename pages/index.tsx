@@ -15,18 +15,27 @@ const Home = ({ videos }: Props) => {
         videos.map((video: Video) => (
           <VideoCard post={video} key={video._id} />
         )) : (
-          <NoResults text={"No Videos"} />
+          <NoResults text={"동영상 없음."} />
         )}
     </div>
   )
 }
 
-export const getServerSideProps = async () => {
-  let { data } = await axios.get(`${process.env.API_BASE_URL}/post`);
+export const getServerSideProps = async ({
+  query: { topic }
+}: {
+  query: { topic: string }
+}) => {
+  let res = null
+  if (topic) {
+    res = await axios.get(`http://localhost:3000/api/discover/${topic}`);
+  } else {
+    res = await axios.get(`http://localhost:3000/api/post`);
+  }
 
   return {
     props: {
-      videos: data
+      videos: res.data
     }
   }
 }

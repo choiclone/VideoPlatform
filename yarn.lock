@@ -159,10 +159,10 @@
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.4.tgz"
   integrity sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA==
 
-"@sanity/cli@^2.30.6":
-  version "2.30.6"
-  resolved "https://registry.npmjs.org/@sanity/cli/-/cli-2.30.6.tgz"
-  integrity sha512-YkVWTXF3FlIZMhs5bzwqppC+MlRtr3n3WW96LAgQxrvTNO1/9PFIN1zb8jL40PtxGEDDMTdin+eJaHuilZjCGQ==
+"@sanity/cli@^2.31.1":
+  version "2.31.1"
+  resolved "https://registry.npmjs.org/@sanity/cli/-/cli-2.31.1.tgz#5519449e61a88e69cf42c47212873b7254e51be9"
+  integrity sha512-IGQ1LCm9DgcF47y/lvVuVeJjL2KNtj2Ihj1XZv/LyyUyq5bl207KCSlIxCOv5mYJeoGxaTnbI98eYqlZPVMk5Q==
 
 "@sanity/client@^3.3.3":
   version "3.3.3"

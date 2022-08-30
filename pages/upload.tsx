@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { FaCloudUploadAlt } from 'react-icons/fa'
-import { MdDelete } from 'react-icons/md';
 import axios from 'axios';
-import { SanityAssetDocument } from '@sanity/client';
-
 import useAuthStore from '../store/authStore';
+
+import { useRouter } from 'next/router';
+import { FaCloudUploadAlt } from 'react-icons/fa';
+import { SanityAssetDocument } from '@sanity/client';
 import { client } from '../utils/client';
 
 import { topics } from '../utils/constants';
 import { BASE_URL } from '../utils';
 
-const upload = () => {
+const Upload = () => {
+  const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
   const [videoAsset, setVideoAsset] = useState<SanityAssetDocument | undefined>();
   const [wrongFileType, setWrongFileType] = useState(false);
@@ -19,8 +20,7 @@ const upload = () => {
   const [category, setCategory] = useState(topics[0].name);
   const [savingPost, setSavingPost] = useState(false);
 
-  const { userProfile } : { userProfile:any } = useAuthStore();
-  const router = useRouter();
+  const { userProfile }: { userProfile: any } = useAuthStore();
 
   const uploadVideo = async (e: any) => {
     const selectedFile = e.target.files[0];
@@ -41,7 +41,7 @@ const upload = () => {
   }
 
   const handlePost = async () => {
-    if(caption && videoAsset?._id && category){
+    if (caption && videoAsset?._id && category) {
       setSavingPost(true);
 
       const document = {
@@ -141,11 +141,11 @@ const upload = () => {
         </div>
         <div className='flex flex-col gab-3 pb-10'>
           <label className='text-md font-medium'>Caption</label>
-          <input 
-            className='rounded outline-none text-md border-2 border-gray-200 p-2' 
-            type="text" 
-            value={caption} 
-            onChange={(e) => {setCaption(e.target.value)}} />
+          <input
+            className='rounded outline-none text-md border-2 border-gray-200 p-2'
+            type="text"
+            value={caption}
+            onChange={(e) => { setCaption(e.target.value) }} />
 
           <label className='text-md font-medium'>Choose a Category</label>
           <select
@@ -164,22 +164,22 @@ const upload = () => {
             ))}
           </select>
           <div className='flex gap-6 mt-10'>
-              <button
-                onClick={() => {}}
-                type="button"
-                className='border-gray-300 border-2 text-md font-medium p-2 rounded w-28
+            <button
+              onClick={() => { }}
+              type="button"
+              className='border-gray-300 border-2 text-md font-medium p-2 rounded w-28
                 lg:w-44 outline-none'
-              >
-                Discard
-              </button>
-              <button
-                onClick={handlePost}
-                type="button"
-                className='bg-[#F51997] border-gray-300 border-2 text-md font-medium p-2 rounded w-28
+            >
+              Discard
+            </button>
+            <button
+              onClick={handlePost}
+              type="button"
+              className='bg-[#F51997] border-gray-300 border-2 text-md font-medium p-2 rounded w-28
                 lg:w-44 outline-none'
-              >
-                Post
-              </button>
+            >
+              Post
+            </button>
           </div>
         </div>
       </div>
@@ -187,4 +187,4 @@ const upload = () => {
   )
 }
 
-export default upload
+export default Upload

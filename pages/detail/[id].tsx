@@ -13,6 +13,8 @@ import useAuthStore from '../../store/authStore'
 import LikeButton from '../../components/LikeButton'
 import Comments from '../../components/Comments'
 
+import { BASE_URL } from '../../utils'
+
 interface Props {
     postDetails: Video;
 }
@@ -67,6 +69,7 @@ const Detail = ({ postDetails }: Props) => {
 
         if (userProfile && comment) {
             setIsPostingComment(true);
+            console.log(BASE_URL)
 
             const { data } = await axios.put(`http://localhost:3000/api/post/${post._id}`, {
                 userId: userProfile._id,
@@ -181,7 +184,7 @@ const Detail = ({ postDetails }: Props) => {
 }
 
 export const getServerSideProps = async ({ params: { id } }: Params) => {
-    const { data } = await axios.get(`http://localhost:3000/api/post/${id}`)
+    const { data } = await axios.get(`${BASE_URL}api/post/${id}`)
 
     return {
         props: { postDetails: data }

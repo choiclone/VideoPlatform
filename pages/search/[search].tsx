@@ -10,6 +10,8 @@ import NoResults from '../../components/NoResults';
 import { IUser, Video } from '../../types';
 import useAuthStore from '../../store/authStore';
 
+import { BASE_URL } from '../../utils'
+
 interface Props {
     videos: Video[]
 }
@@ -77,7 +79,7 @@ const Search = ({ videos }: Props) => {
 }
 
 export const getServerSideProps = async ({ params: { search } }: { params: { search: string } }) => {
-    const res = await axios.get(`http://localhost:3000/api/search/${encodeURI(search)}`)
+    const res = await axios.get(`${BASE_URL}api/search/${encodeURI(search)}`)
 
     return {
         props: {

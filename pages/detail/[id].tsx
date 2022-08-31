@@ -54,7 +54,7 @@ const Detail = ({ postDetails }: Props) => {
 
     const handleLike = async (like: boolean) => {
         if (userProfile) {
-            const { data } = await axios.put(`http://localhost:3000/api/like`, {
+            const { data } = await axios.put(`${BASE_URL}api/like`, {
                 userId: userProfile._id,
                 postId: post._id,
                 like
@@ -71,7 +71,7 @@ const Detail = ({ postDetails }: Props) => {
             setIsPostingComment(true);
             console.log(BASE_URL)
 
-            const { data } = await axios.put(`http://localhost:3000/api/post/${post._id}`, {
+            const { data } = await axios.put(`${BASE_URL}api/post/${post._id}`, {
                 userId: userProfile._id,
                 comment
             });

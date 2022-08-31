@@ -3,7 +3,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  distDir: 'build',
+  // distDir: 'build',
   env: {
     BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
   },

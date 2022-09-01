@@ -1,5 +1,5 @@
 export const allPostsQuery = () => {
-    const query = `*[_type == "post"] | order(_createdAt desc){
+  const query = `*[_type == "post"] | order(_createdAt desc){
       _id,
        caption,
          video{
@@ -25,12 +25,12 @@ export const allPostsQuery = () => {
       },
       }
     }`;
-  
-    return query;
-  };
-  
-  export const postDetailQuery = (postId: string | string[] | undefined) => {
-    const query = `*[_type == "post" && _id == '${postId}']{
+
+  return query;
+};
+
+export const postDetailQuery = (postId: string | string[] | undefined) => {
+  const query = `*[_type == "post" && _id == '${postId}']{
       _id,
        caption,
          video{
@@ -55,11 +55,11 @@ export const allPostsQuery = () => {
       },
       }
     }`;
-    return query;
-  };
-  
-  export const searchPostsQuery = (searchTerm: string | string[] | undefined) => {
-    const query = `*[_type == "post" && caption match '${searchTerm}*' || topic match '${searchTerm}*'] {
+  return query;
+};
+
+export const searchPostsQuery = (searchTerm: string | string[] | undefined) => {
+  const query = `*[_type == "post" && caption match '${searchTerm}*' || topic match '${searchTerm}*'] {
       _id,
        caption,
          video{
@@ -85,23 +85,23 @@ export const allPostsQuery = () => {
       },
       }
     }`;
-    return query;
-  };
-  
-  export const singleUserQuery = (userId: string | string[] | undefined) => {
-    const query = `*[_type == "user" && _id == '${userId}']`;
-  
-    return query;
-  };
-  
-  export const allUsersQuery = () => {
-    const query = `*[_type == "user"]`;
-  
-    return query;
-  };
-  
-  export const userCreatedPostsQuery = (userId: string | string[] | undefined) => {
-    const query = `*[ _type == 'post' && userId == '${userId}'] | order(_createdAt desc){
+  return query;
+};
+
+export const singleUserQuery = (userId: string | string[] | undefined) => {
+  const query = `*[_type == "user" && _id == '${userId}']`;
+
+  return query;
+};
+
+export const allUsersQuery = () => {
+  const query = `*[_type == "user"]`;
+
+  return query;
+};
+
+export const userCreatedPostsQuery = (userId: string | string[] | undefined) => {
+  const query = `*[ _type == 'post' && userId == '${userId}'] | order(_createdAt desc){
       _id,
        caption,
          video{
@@ -127,12 +127,12 @@ export const allPostsQuery = () => {
       },
       }
     }`;
-  
-    return query;
-  };
-  
-  export const userLikedPostsQuery = (userId: string | string[] | undefined) => {
-    const query = `*[_type == 'post' && '${userId}' in likes[]._ref ] | order(_createdAt desc) {
+
+  return query;
+};
+
+export const userLikedPostsQuery = (userId: string | string[] | undefined) => {
+  const query = `*[_type == 'post' && '${userId}' in likes[]._ref ] | order(_createdAt desc) {
       _id,
        caption,
          video{
@@ -158,12 +158,12 @@ export const allPostsQuery = () => {
       },
       }
     }`;
-  
-    return query;
-  };
-  
-  export const topicPostsQuery = (topic: string | string[] | undefined) => {
-    const query = `*[_type == "post" && topic match '${topic}*'] {
+
+  return query;
+};
+
+export const topicPostsQuery = (topic: string | string[] | undefined) => {
+  const query = `*[_type == "post" && topic match '${topic}*'] {
       _id,
        caption,
          video{
@@ -189,6 +189,6 @@ export const allPostsQuery = () => {
       },
       }
     }`;
-  
-    return query;
-  };
+
+  return query;
+};
